@@ -1,36 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Todo app</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <title>Frontend Mentor | Todo app</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  Todo
+  <div class="body-container">
 
-  <!-- Add dynamic number --> items left
+    <header>
+      <h1>TODO</h1>
+      <img class="theme-toggle" src="images/icon-moon.svg" alt="moon">
+    </header>
+    <main>
+      <div class="add-todo">
+        <input type="checkbox" disabled id="add-todo-checkbox"></input>
+        <input id="add-todo-input" type="text" placeholder="Create a new todo...">
+      </div>
 
-  All
-  Active 
-  Completed
+      <div class="todos-container">
+        <div class="todo">
+          <div class="todo-details">
+            <input class="todo-checkbox" type="checkbox"></input>
+            <p class="todo-title" data-todo-done>Complete online JavaScript course</p>
+          </div>
+          <button class="delete-todo"></button>
+        </div>
+        <div class="todo">
+          <div class="todo-details">
+            <input class="todo-checkbox" type="checkbox"></input>
+            <p class="todo-title">Jog around the part 3x</p>
+          </div>
+          <button class="delete-todo"></button>
+        </div>
+        <div class="todo">
+          <div class="todo-details">
+            <input class="todo-checkbox" type="checkbox"></input>
+            <p class="todo-title">10 minutes meditation</p>
+          </div>
+          <button class="delete-todo"></button>
+        </div>
+        <div class="todo">
+          <div class="todo-details">
+            <input class="todo-checkbox" type="checkbox"></input>
+            <p class="todo-title">Read for 1 hour</p>
+          </div>
+          <button class="delete-todo"></button>
+        </div>
+        <div class="todo">
+          <div class="todo-details">
+            <input class="todo-checkbox" type="checkbox"></input>
+            <p class="todo-title">Pick up groceries</p>
+          </div>
+          <button class="delete-todo"></button>
+        </div>
+        <div class="todo">
+          <div class="todo-details">
+            <input class="todo-checkbox" type="checkbox"></input>
+            <p class="todo-title">Complete Todo App on Frontend Mentor</p>
+          </div>
+          <button class="delete-todo"></button>
+        </div>
 
-  Clear Completed
+        <section>
+          <div class="todo-left">
+            <!-- Add dynamic number -->
+            <p>5 items left</p>
+          </div>
+          <div class="todo-filter">
+            <p id="filter-all" class="filter">All</p>
+            <p id="filter-active" class="filter">Active</p>
+            <p id="filter-completed" class="filter">Completed</p>
+          </div>
+          <p id="clear-completed">Clear Completed</p>
+        </section>
+      </div>
 
-  Drag and drop to reorder list
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
   </div>
+  <p class="todo-info">Drag and drop to reorder list</p>
+
+  </main>
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="http://www.github.com/exequielarroyo">Exequiel Arroyo</a>.
+  </footer>
+
+  <script src="script.js"></script>
 </body>
+
 </html>
