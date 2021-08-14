@@ -27,58 +27,63 @@
       </div>
 
       <div class="todos-container">
-        <div class="todo">
-          <div class="todo-details">
-            <input class="todo-checkbox" type="checkbox"></input>
-            <p class="todo-title" data-todo-done>Complete online JavaScript course</p>
+        <div class="todos-wrapper">
+          <!-- <div class="todo">
+            <div class="todo-details">
+              <input class="todo-checkbox" type="checkbox"></input>
+              <p class="todo-title" data-todo-done>Complete online JavaScript course</p>
+            </div>
+            <button class="delete-todo"></button>
+          </div> -->
+          <!-- <div class="todo">
+            <div class="todo-details">
+              <input class="todo-checkbox" type="checkbox"></input>
+              <p class="todo-title">Jog around the part 3x</p>
+            </div>
+            <button class="delete-todo"></button>
           </div>
-          <button class="delete-todo"></button>
-        </div>
-        <div class="todo">
-          <div class="todo-details">
-            <input class="todo-checkbox" type="checkbox"></input>
-            <p class="todo-title">Jog around the part 3x</p>
+          <div class="todo">
+            <div class="todo-details">
+              <input class="todo-checkbox" type="checkbox"></input>
+              <p class="todo-title">10 minutes meditation</p>
+            </div>
+            <button class="delete-todo"></button>
           </div>
-          <button class="delete-todo"></button>
-        </div>
-        <div class="todo">
-          <div class="todo-details">
-            <input class="todo-checkbox" type="checkbox"></input>
-            <p class="todo-title">10 minutes meditation</p>
+          <div class="todo">
+            <div class="todo-details">
+              <input class="todo-checkbox" type="checkbox"></input>
+              <p class="todo-title">Read for 1 hour</p>
+            </div>
+            <button class="delete-todo"></button>
           </div>
-          <button class="delete-todo"></button>
-        </div>
-        <div class="todo">
-          <div class="todo-details">
-            <input class="todo-checkbox" type="checkbox"></input>
-            <p class="todo-title">Read for 1 hour</p>
+          <div class="todo">
+            <div class="todo-details">
+              <input class="todo-checkbox" type="checkbox"></input>
+              <p class="todo-title">Pick up groceries</p>
+            </div>
+            <button class="delete-todo"></button>
           </div>
-          <button class="delete-todo"></button>
-        </div>
-        <div class="todo">
-          <div class="todo-details">
-            <input class="todo-checkbox" type="checkbox"></input>
-            <p class="todo-title">Pick up groceries</p>
-          </div>
-          <button class="delete-todo"></button>
-        </div>
-        <div class="todo">
-          <div class="todo-details">
-            <input class="todo-checkbox" type="checkbox"></input>
-            <p class="todo-title">Complete Todo App on Frontend Mentor</p>
-          </div>
-          <button class="delete-todo"></button>
+          <div class="todo">
+            <div class="todo-details">
+              <input class="todo-checkbox" type="checkbox"></input>
+              <p class="todo-title">Complete Todo App on Frontend Mentor</p>
+            </div>
+            <button class="delete-todo"></button>
+          </div> -->
         </div>
 
         <section>
           <div class="todo-left">
             <!-- Add dynamic number -->
-            <p>5 items left</p>
+            <p class="todo-left" id="todo-left">0 items left</p>
           </div>
           <div class="todo-filter">
-            <p id="filter-all" class="filter">All</p>
-            <p id="filter-active" class="filter">Active</p>
-            <p id="filter-completed" class="filter">Completed</p>
+            <input type="radio" name="filter" id="all" checked>
+            <label id="filter-all" class="filter" for="all">All</label>
+            <input type="radio" name="filter" id="active">
+            <label id="filter-active" class="filter" for="active">Active</label>
+            <input type="radio" name="filter" id="completed">
+            <label id="filter-completed" class="filter" for="completed">Completed</label>
           </div>
           <p id="clear-completed">Clear Completed</p>
         </section>

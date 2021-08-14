@@ -151,11 +151,12 @@ input#add-todo-checkbox {
 .todo-details {
     display: flex;
     align-items: center;
+    cursor: grab;
 }
 
 .delete-todo {
-    width: 25px;
-    height: 25px;
+    min-width: 25px;
+    min-height: 25px;
     appearance: none;
     border: none;
     background-color: transparent;
@@ -205,17 +206,24 @@ section p {
 
 /* filter */
 
-#filter-all {
-    color: var(--prm-color);
+#filter-active {
+    margin: 0 20px;
 }
 
 .filter:hover {
     color: var(--font-color-prm);
 }
 
+input[type="radio"] {
+    appearance: none;
+}
+
+input[type="radio"]:checked + .filter {
+    color: var(--prm-color);
+}
+
 #clear-completed:hover {
     color: var(--font-color-prm);
-    font-weight: 700;
 }
 
 /* footer */
@@ -240,7 +248,7 @@ footer {
     .todo-info {
         margin-top: 120px;
     }
-    .delete-todo{
+    .delete-todo {
         visibility: visible !important;
     }
 }
