@@ -57,14 +57,16 @@ const todosWrapper = document.querySelector(".todos-wrapper");
 
 function loadTodos() {
     let stringArray = localStorage.getItem("items");
-    const todosData = stringArray.split(",");
-    todosData.forEach(todoTitle => {
-        if (todosData != "") {
-            todos.push(new Todo(todoTitle));
-            updateTodo();
-            updateTodosLeft(todos);
-        }
-    });
+    if (stringArray != null) {
+        const todosData = stringArray.split(",");
+        todosData.forEach(todoTitle => {
+            if (todosData != "") {
+                todos.push(new Todo(todoTitle));
+                updateTodo();
+                updateTodosLeft(todos);
+            }
+        });
+    }
 }
 
 loadTodos();
@@ -136,7 +138,7 @@ clearCompleted.addEventListener("click", e => {
     todos.forEach(todo => {
         todosWrapper.append(todo.todo);
     });
-    updateTodo()
+    updateTodo();
 });
 
 function updateTodosLeft(todos) {

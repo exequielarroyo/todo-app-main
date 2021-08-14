@@ -121,6 +121,10 @@ input#add-todo-checkbox {
     box-shadow: 0 0 20px var(--box-shadow);
 }
 
+.todo-title{
+    cursor: pointer;
+}
+
 .todo {
     padding: 20px 20px;
     display: flex;
@@ -141,6 +145,7 @@ input#add-todo-checkbox {
     border: 1px solid var(--font-color-sdr);
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
 }
 
 .todo input[type="checkbox"]:checked {
@@ -162,7 +167,6 @@ input#add-todo-checkbox {
 .todo-details {
     display: flex;
     align-items: center;
-    cursor: grab;
 }
 
 .delete-todo {
@@ -217,6 +221,10 @@ section p {
 
 /* filter */
 
+.filter{
+    cursor: pointer;
+}
+
 #filter-active {
     margin: 0 20px;
 }
@@ -233,8 +241,10 @@ input[type="radio"]:checked + .filter {
     color: var(--prm-color);
 }
 
+
 #clear-completed:hover {
     color: var(--font-color-prm);
+    cursor: pointer;
 }
 
 /* footer */
