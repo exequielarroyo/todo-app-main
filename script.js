@@ -18,8 +18,8 @@ class Todo {
         this.deleteBtn.addEventListener("click", e => {
             this.todo.remove();
             todos.splice(todos.indexOf(this), 1);
-            updateTodosLeft(todos);
             updateTodo();
+            updateTodosLeft(todos);
         });
         this.todo.addEventListener("mouseenter", e => {
             this.deleteBtn.style.visibility = "visible";
@@ -32,14 +32,16 @@ class Todo {
                 this.todoTitle.innerHTML = `<del>${this.todoTitle.innerText}</del>`;
                 this.todoTitle.style.color = "var(--font-color-sdr)";
                 this.active = false;
-                updateTodosLeft(todos);
+                this.checkbox.checked = !this.active;
                 updateTodo();
+                updateTodosLeft(todos);
             } else {
                 this.todoTitle.innerHTML = `${this.todoTitle.innerText}`;
                 this.todoTitle.style.color = "var(--font-color-prm)";
                 this.active = true;
-                updateTodosLeft(todos);
+                this.checkbox.checked = !this.active;
                 updateTodo();
+                updateTodosLeft(todos);
             }
         });
 
@@ -50,26 +52,10 @@ class Todo {
     }
 }
 
-let todos = [];
+let todos = new Array();
 
 const todoInput = document.querySelector("#add-todo-input");
 const todosWrapper = document.querySelector(".todos-wrapper");
-
-function loadTodos() {
-    let stringArray = localStorage.getItem("items");
-    if (stringArray != null) {
-        const todosData = stringArray.split(",");
-        todosData.forEach(todoTitle => {
-            if (todosData != "") {
-                todos.push(new Todo(todoTitle));
-                updateTodo();
-                updateTodosLeft(todos);
-            }
-        });
-    }
-}
-
-loadTodos();
 
 todoInput.addEventListener("keyup", e => {
     if (e.keyCode === 13) {
@@ -139,6 +125,7 @@ clearCompleted.addEventListener("click", e => {
         todosWrapper.append(todo.todo);
     });
     updateTodo();
+    updateTodosLeft(todos);
 });
 
 function updateTodosLeft(todos) {
@@ -172,9 +159,52 @@ function updateTodo() {
             return todo["details"].innerText;
         })}`
     );
+    console.log("<<< UPDATE");
+    console.log(todos);
+
+    localStorage.setItem(
+        "actives",
+        `${todos.map(todo => {
+            return (todo["active"] == true).toString();
+        })}`
+    );
+
+    console.log(localStorage.getItem("actives"));
 }
 
-function loadLocalstorage() {
+function loadTodos() {
+    console.log("<<< LOAD");
+    console.log(todos);
+    let stringArray = localStorage.getItem("items");
+    console.log(stringArray);
+    let stringActives = localStorage.getItem("actives");
+    console.log(stringActives);
+
+    if (stringArray != null) {
+        const todosData = stringArray.split(",");
+        const todosActives = stringActives.split(",");
+        todosData.forEach((todoTitle, index) => {
+            if (todosData != "") {
+                const todo = new Todo(todoTitle);
+                let isActive = todosActives[index] == "true";
+                todo.active = isActive;
+                if (!isActive) {
+                    todo["checkbox"].checked = !todo.active;
+                    todo["todoTitle"].innerHTML = `<del>${todo['todoTitle'].innerText}</del>`;
+                    todo["todoTitle"]['style'].color = "var(--font-color-sdr)";
+                }
+                todos.push(todo);
+
+                updateTodo();
+                updateTodosLeft(todos);
+            }
+        });
+    }
+}
+
+loadTodos();
+
+function loadDarkmode() {
     isDarkmode = localStorage.getItem("isDarkmode");
     if (isDarkmode == "true") {
         document.body.classList.add("theme-darkmode");
@@ -182,9 +212,10 @@ function loadLocalstorage() {
         document.body.classList.remove("theme-darkmode");
     }
 }
+
 let isDarkmode = localStorage.getItem("isDarkmode");
 
-loadLocalstorage();
+loadDarkmode();
 
 const themeToggle = document.getElementById("theme-toggle");
 themeToggle.addEventListener("click", e => {
@@ -193,5 +224,5 @@ themeToggle.addEventListener("click", e => {
     } else {
         localStorage.setItem("isDarkmode", true);
     }
-    loadLocalstorage();
+    loadDarkmode();
 });
