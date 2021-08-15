@@ -62,7 +62,7 @@ body {
 }
 
 .body-container {
-    max-width: 580px;
+    max-width: 540px;
     margin: auto;
     padding: 80px 0 0 0;
 }
@@ -254,6 +254,9 @@ footer {
 }
 
 @media (max-width: 600px) {
+    .body-container {
+        padding: 50px 0 0 0;
+    }
     .todo-filter {
         position: absolute;
         top: 70px;
