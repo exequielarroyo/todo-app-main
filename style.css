@@ -58,7 +58,6 @@ body {
     background-color: var(--bg-color);
     background-repeat: no-repeat;
     /* background-size: cover; */
-    background-position: top;
     padding: 0 20px;
     color: var(--font-color-prm);
 }
@@ -90,7 +89,7 @@ h1 {
 .add-todo {
     background-color: var(--card-color);
     border-radius: 5px;
-    padding: 20px 20px;
+    padding: 20px;
     margin: 40px 0 20px 0;
     display: flex;
     align-items: center;
@@ -256,8 +255,23 @@ footer {
 }
 
 @media (max-width: 600px) {
+    *{
+        font-size: 0.9rem;
+    }
+    body {
+        height: 200px;
+        background-size: cover;
+        background-position: 30%;
+    }
     .body-container {
         padding: 50px 0 0 0;
+    }
+    .add-todo{
+        padding: 15px;
+        margin: 20px 0;
+    }
+    .todo{
+        padding: 15px;
     }
     .todo-filter {
         position: absolute;
