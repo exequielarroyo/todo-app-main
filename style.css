@@ -2,6 +2,7 @@
 
 :root {
     --background-image: url("images/bg-desktop-light.jpg");
+    --toggle-image: url("images/icon-moon.svg");
 
     --font-family: "Josefin Sans";
     --font-size: 18px;
@@ -12,7 +13,7 @@
         hsl(192, 100%, 67%),
         hsl(280, 87%, 65%)
     );
-    
+
     --card-color: white;
     --bg-color: hsl(0, 0%, 98%);
     --font-color-prm: hsl(235, 19%, 35%);
@@ -20,7 +21,7 @@
     --box-shadow: hsla(240, 9%, 61%, 0.267);
     --border-bottom: hsla(235, 19%, 35%, 0.164);
     --color: hsl(236, 33%, 92%);
-    
+
     --color: hsl(236, 33%, 92%);
 }
 
@@ -31,7 +32,8 @@
     --card-color: hsl(235, 24%, 19%);
     --font-color-prm: hsl(234, 39%, 85%);
     --font-color-sdr: hsl(234, 11%, 52%);
-    --box-shadow: hsla(237, 14%, 26%, 0.267);
+    --box-shadow: hsla(0, 0%, 0%, 0.418);
+    --toggle-image: url("images/icon-sun.svg");
 }
 
 .attribution {
@@ -79,6 +81,7 @@ h1 {
 }
 
 .theme-toggle {
+    src: url(--toggle-image);
     align-self: flex-start;
 }
 
@@ -118,10 +121,10 @@ input#add-todo-checkbox {
 .todos-container {
     border-radius: 5px;
     background-color: var(--card-color);
-    box-shadow: 0 0 20px var(--box-shadow);
+    box-shadow: 0 5px 20px var(--box-shadow);
 }
 
-.todo-title{
+.todo-title {
     cursor: pointer;
 }
 
@@ -221,7 +224,7 @@ section p {
 
 /* filter */
 
-.filter{
+.filter {
     cursor: pointer;
 }
 
@@ -240,7 +243,6 @@ input[type="radio"] {
 input[type="radio"]:checked + .filter {
     color: var(--prm-color);
 }
-
 
 #clear-completed:hover {
     color: var(--font-color-prm);

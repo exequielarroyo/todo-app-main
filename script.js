@@ -206,9 +206,12 @@ loadTodos();
 
 function loadDarkmode() {
     isDarkmode = localStorage.getItem("isDarkmode");
+    const toggle = document.getElementById('theme-toggle');
     if (isDarkmode == "true") {
+        toggle.src = 'images/icon-sun.svg'
         document.body.classList.add("theme-darkmode");
     } else {
+        toggle.src = 'images/icon-moon.svg'
         document.body.classList.remove("theme-darkmode");
     }
 }
