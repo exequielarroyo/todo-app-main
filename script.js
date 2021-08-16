@@ -22,6 +22,8 @@ class Todo {
 
         this.todo.addEventListener("dragend", e => {
             this.todo.classList.remove("dragging");
+            todos = sortTodos();
+            updateTodo();
         });
 
         this.deleteBtn.addEventListener("click", e => {
@@ -40,15 +42,15 @@ class Todo {
             if (this.checkbox.checked) {
                 this.todoTitle.innerHTML = `<del>${this.todoTitle.innerText}</del>`;
                 this.todoTitle.style.color = "var(--font-color-sdr)";
+                this.checkbox.checked = true;
                 this.active = false;
-                this.checkbox.checked = !this.active;
                 updateTodo();
                 updateTodosLeft(todos);
             } else {
                 this.todoTitle.innerHTML = `${this.todoTitle.innerText}`;
                 this.todoTitle.style.color = "var(--font-color-prm)";
+                this.checkbox.checked = false;
                 this.active = true;
-                this.checkbox.checked = !this.active;
                 updateTodo();
                 updateTodosLeft(todos);
             }
@@ -191,19 +193,47 @@ function updateTodo() {
         filterActive();
     }
 
+    // const items = todos.map(todo => {
+    //     const detailsCollection = todo.details.children
+    //     return detailsCollection[1].innerText;
+    // })
+
+    // localStorage.setItem("items", items.toString());
+
     localStorage.setItem(
         "items",
         `${todos.map(todo => {
-            return todo["details"].innerText;
+            return todo["details"].children[1].innerText;
         })}`
     );
 
     localStorage.setItem(
         "actives",
         `${todos.map(todo => {
-            return (todo["active"] == true).toString();
+            return todo["active"] == true;
         })}`
     );
+
+    console.log(localStorage.getItem("actives"));
+}
+
+function sortTodos() {
+    const oldTodos = [...document.querySelectorAll(".todo")];
+
+    const newTodos = oldTodos.map((todo, index) => {
+        const title = todo.querySelector(".todo-title").innerText;
+
+        const newTodo = new Todo(title);
+        newTodo.checkbox.checked = todo.querySelector(".todo-checkbox").checked;
+        newTodo.active = !newTodo.checkbox.checked;
+        if (!newTodo.active) {
+            newTodo.todoTitle.innerHTML = `<del>${newTodo.todoTitle.innerText}</del>`;
+            newTodo.todoTitle.style.color = "var(--font-color-sdr)";
+        }
+   
+        return newTodo;
+    });
+    return newTodos;
 }
 
 function loadTodos() {
@@ -226,11 +256,10 @@ function loadTodos() {
                     todo["todoTitle"]["style"].color = "var(--font-color-sdr)";
                 }
                 todos.push(todo);
-
-                updateTodo();
-                updateTodosLeft(todos);
             }
         });
+        updateTodo();
+        updateTodosLeft(todos);
     }
 }
 
