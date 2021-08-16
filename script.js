@@ -2,6 +2,7 @@ class Todo {
     constructor(title) {
         this.todo = document.createElement("div");
         this.todo.classList.add("todo");
+        this.todo.setAttribute("draggable", "true");
         this.details = document.createElement("div");
         this.details.classList.add("todo-details");
         this.checkbox = document.createElement("input");
@@ -14,6 +15,14 @@ class Todo {
         this.deleteBtn.classList.add("delete-todo");
         this.deleteBtn.style.visibility = "hidden";
         this.active = true;
+
+        this.todo.addEventListener("dragstart", e => {
+            this.todo.classList.add("dragging");
+        });
+
+        this.todo.addEventListener("dragend", e => {
+            this.todo.classList.remove("dragging");
+        });
 
         this.deleteBtn.addEventListener("click", e => {
             this.todo.remove();
@@ -69,6 +78,35 @@ todoInput.addEventListener("keyup", e => {
         todoInput.value = "";
     }
 });
+
+todosWrapper.addEventListener("dragover", e => {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(todosWrapper, e.clientY);
+    const draggable = document.querySelector(".dragging");
+    if (afterElement == null) {
+        todosWrapper.appendChild(draggable);
+    } else {
+        todosWrapper.insertBefore(draggable, afterElement);
+    }
+});
+
+function getDragAfterElement(container, y) {
+    const draggableElements = [
+        ...container.querySelectorAll(".todo:not(.dragging)")
+    ];
+    return draggableElements.reduce(
+        (closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        },
+        { offset: Number.NEGATIVE_INFINITY }
+    ).element;
+}
 
 const filterActiveLabel = document.getElementById("filter-active");
 const filterAllLabel = document.getElementById("filter-all");
@@ -159,8 +197,6 @@ function updateTodo() {
             return todo["details"].innerText;
         })}`
     );
-    console.log("<<< UPDATE");
-    console.log(todos);
 
     localStorage.setItem(
         "actives",
@@ -168,17 +204,11 @@ function updateTodo() {
             return (todo["active"] == true).toString();
         })}`
     );
-
-    console.log(localStorage.getItem("actives"));
 }
 
 function loadTodos() {
-    console.log("<<< LOAD");
-    console.log(todos);
     let stringArray = localStorage.getItem("items");
-    console.log(stringArray);
     let stringActives = localStorage.getItem("actives");
-    console.log(stringActives);
 
     if (stringArray != null) {
         const todosData = stringArray.split(",");
@@ -190,8 +220,10 @@ function loadTodos() {
                 todo.active = isActive;
                 if (!isActive) {
                     todo["checkbox"].checked = !todo.active;
-                    todo["todoTitle"].innerHTML = `<del>${todo['todoTitle'].innerText}</del>`;
-                    todo["todoTitle"]['style'].color = "var(--font-color-sdr)";
+                    todo[
+                        "todoTitle"
+                    ].innerHTML = `<del>${todo["todoTitle"].innerText}</del>`;
+                    todo["todoTitle"]["style"].color = "var(--font-color-sdr)";
                 }
                 todos.push(todo);
 
@@ -206,12 +238,12 @@ loadTodos();
 
 function loadDarkmode() {
     isDarkmode = localStorage.getItem("isDarkmode");
-    const toggle = document.getElementById('theme-toggle');
+    const toggle = document.getElementById("theme-toggle");
     if (isDarkmode == "true") {
-        toggle.src = 'images/icon-sun.svg'
+        toggle.src = "images/icon-sun.svg";
         document.body.classList.add("theme-darkmode");
     } else {
-        toggle.src = 'images/icon-moon.svg'
+        toggle.src = "images/icon-moon.svg";
         document.body.classList.remove("theme-darkmode");
     }
 }
